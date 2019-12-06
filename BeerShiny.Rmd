@@ -1,0 +1,230 @@
+---
+title: "Beer Data"
+author: "Alex Salamah"
+date: "App last updated on: 11/13/2019"
+output: html_document
+runtime: shiny
+---
+<style type="text/css">
+
+h1.title {
+  font-size: 38px;
+  color: Blue;
+  text-align: center;
+}
+h4.author { /* Header 4 - and the author and data headers use this too  */
+    font-size: 18px;
+  font-family: "Times New Roman", Times, serif;
+  color: Blue;
+  text-align: center;
+}
+h4.date { /* Header 4 - and the author and data headers use this too  */
+  font-size: 18px;
+  font-family: "Times New Roman", Times, serif;
+  color: Blue;
+  text-align: center;
+
+
+#header 
+    background: #2274cc; /* Old browsers */
+    background: -moz-linear-gradient(left, #2274cc 0%, #26c5d3 36%, #61bf61 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, #2274cc 0%,#26c5d3 36%,#61bf61 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, #2274cc 0%,#26c5d3 36%,#61bf61 100%); /* W3C, IE10+, FF16+, Chrome26+,  Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2274cc', endColorstr='#61bf61',GradientType=1 ); /* IE6-9 */
+    color: white;
+    height: 100px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
+<br>
+<br>
+
+```{r, include=FALSE}
+# Get the data
+# Adding setwd() would result in error when publishing to Shiny!
+BeersDF <- read.csv(file = "Beers.csv", header = TRUE)
+BreweriesDF <- read.csv(file = "Breweries.csv", header = TRUE)
+AlcoholDF <- read.csv(file = "AlcoholAbuse.csv", header = TRUE)
+```
+
+```{r, include=FALSE}
+# Visualization
+library(tidyverse)
+library(plotly)
+library(plyr)
+library(dplyr)
+library(maps)
+library(inspectdf)
+library(VIM)
+library(ggthemes)
+library(GGally)
+library(prettydoc)
+library(treemap)
+library(gridExtra)
+
+# data wrangling 
+library(stringr)
+library(tm)
+library(knitr)
+library(sqldf)
+library(dataMaid)
+
+# classification and modeling
+library(class)
+library(e1071)
+library(caret)
+```
+
+```{r include=FALSE}
+## 2. Merge beer data with the breweries data.
+mergeDF <- merge(BeersDF, BreweriesDF, by.x = "Brewery_id", by.y = "Brew_ID")
+colnames(mergeDF)[2] = "Beer_name"
+colnames(mergeDF)[8] = "Brewery_name"
+```
+
+```{r include=FALSE}
+## 3. Address the missing values in each column.  
+matrixplot(mergeDF)
+marginplot(mergeDF[c("ABV","IBU")], pch = c(20), col = c("darkgray", "red", "blue"))
+IBUNADF <-  mergeDF %>% filter(is.na(IBU))
+ABVNADF <-  mergeDF %>% filter(is.na(ABV))
+BOTHNADF <- mergeDF %>% filter(is.na(ABV) & is.na(IBU))
+# Calculate IBU and ABV median value of each state
+IBUmedianState <- mergeDF %>% filter(!is.na(IBU)) %>% group_by(State) %>% dplyr::summarise(IBUmedian=median(IBU))
+ABVmedianState <- mergeDF %>% filter(!is.na(ABV)) %>% group_by(State) %>% dplyr::summarise(ABVmedian=median(ABV))
+# Replace IBU NA's with state median value
+mergeDF_no_IBU_NA <- left_join(mergeDF, IBUmedianState, by = "State")
+mergeDF_no_IBU_NA$IBU[is.na(mergeDF_no_IBU_NA$IBU)]  <- as.character(mergeDF_no_IBU_NA$IBUmedian[is.na(mergeDF_no_IBU_NA$IBU)])
+# Replace 7 IBU NA's in SD with grand median value 35.00
+mergeDF_no_IBU_NA$IBU = str_replace_na(mergeDF_no_IBU_NA$IBU, replacement =  "35")
+mergeDF_no_IBU_NA$IBUmedian = str_replace_na(mergeDF_no_IBU_NA$IBUmedian, replacement =  "35")
+# Replace ABV NA's with state median value
+mergeDF_noNA <- left_join(mergeDF_no_IBU_NA, ABVmedianState, by = "State")
+mergeDF_noNA$ABV[is.na(mergeDF_noNA$ABV)] <- as.character(mergeDF_noNA$ABVmedian[is.na(mergeDF_noNA$ABV)])
+mergeDF_noNA$IBU <- as.numeric(mergeDF_noNA$IBU)
+mergeDF_noNA$ABV <- as.numeric(mergeDF_noNA$ABV)
+
+```
+
+```{r echo=FALSE}
+# youtube: https://www.youtube.com/watch?v=AFau9WJbZj4
+library(shiny)
+#library(reshape2)
+
+ui <- fluidPage(
+ # titlePanel("US Craft Beer Data"),
+  
+  # Application title
+  sidebarLayout(
+    sidebarPanel(
+      # Select state
+      selectInput("inState", "Select state to show plot", choices = mergeDF_noNA$State),
+      
+      # Select plots
+      selectInput("select", "Select plot type", choices = c("Histogram", "Boxplot", "Scatterplot", "Correlation")),
+      
+      # Select regression line in scatterplot
+      selectInput("selectline", "Add a regression line?", choices = c("Yes", "No"))
+    ),
+    
+    # Show a plot of the generated distribution
+    mainPanel(
+      tabsetPanel(
+        tabPanel("Plot",
+                 fluidRow(
+                   splitLayout(cellWidths = "400px",
+                                 #c("50%", "50%"),
+                   plotOutput("distPlot1", height = "300px", width = "450px"),
+                   plotOutput("distPlot2", height = "300px", width = "450px"),
+                   column(width = 10)
+                                      #,
+                   #plotOutput("distPlot3"),
+                   #plotOutput("distPlot4")
+                   )
+        )),
+      
+      tabPanel("Raw Data", tableOutput("BeerData"))
+   )
+  )
+)
+)
+
+# Taking the 'input' from UI, giving the 'output' back to UI.
+# renderTable is a reactive function, which means that whenever user is changing any value, the table value is getting changed.
+server <- function(input, output) {
+  
+  # Output Beer data table
+  output$BeerData <- renderTable({
+    stateFilter <- subset(mergeDF_noNA, mergeDF_noNA$State == input$inState)
+  })
+  
+  # output Beer plots
+    output$distPlot1 <- renderPlot({
+      stateFilter <- subset(mergeDF_noNA, mergeDF_noNA$State == input$inState)
+      if(input$select == "Histogram")
+        {
+        stateFilter %>% ggplot(aes(x=ABV)) + geom_histogram(fill="blue", color="white") + ggtitle("Histogram ABV")
+      }
+      else
+        if(input$select == "Boxplot")
+          {
+          stateFilter %>% ggplot(aes(y=ABV, fill=as.factor(Ounces))) + geom_boxplot() +
+            xlab("Ale Types (IPA or ALE)") + ylab("ABV") + ggtitle("Boxplot of ABV vs Ale Type")
+        }
+      else
+        if(input$select == "Scatterplot")
+        {
+          if(input$selectline == "Yes")
+          {
+            p1 <- stateFilter %>% ggplot(aes(x=ABV, y=IBU)) + geom_point(aes(color=State), size=1, position="jitter") +
+              geom_smooth(method = lm) + ggtitle("Scatterplot: IBU vs ABV with regression line")
+            grid.arrange(p1, ncol=1, widths = c(4))
+          }
+          else
+            if(input$selectline == "No")
+            {
+              stateFilter %>% ggplot(aes(x=ABV, y=IBU)) + geom_point(aes(color=State), size=1, position="jitter") +
+                ggtitle("Scatterplot: IBU vs ABV no regression line")                    
+            }
+        }
+      else
+        if(input$select == "Correlation")
+        {
+#          Brew_Name.notna <- BreweriesDF %>% filter(!is.na(Name)) # 558 not NA
+Corl <- inspect_cor(BeersDF)
+show_plot (Corl, plot_layout = c(3, 5))
+ 
+           # Brew_tm1 <- Brew_Name.notna %>% group_by(State) %>%  dplyr::summarise(NumBrew=n())
+           # Brew_tm1$State.NumBrew <- do.call(paste, c(Brew_tm1[c("State","NumBrew")], sep = "\n")) 
+           # 
+           # treemap(Brew_tm1, # Your data frame object
+           #         index = c("State.NumBrew"),
+           #         vSize = "NumBrew",
+           #         type = "index", # index, value, comp, dens, depth, categorical, color, manual
+           #         palette = "Reds",
+           #         title = "Number of Breweries in States",
+           #         fontsize.title = 14
+           #         )
+        }
+      })
+    
+    output$distPlot2 <- renderPlot({
+      stateFilter <- subset(mergeDF_noNA, mergeDF_noNA$State == input$inState)
+      if(input$select == "Histogram")
+        {
+        stateFilter %>% ggplot(aes(x=IBU)) + geom_histogram(fill="orange", color="black") + ggtitle("Histogram IBU")
+      }
+      else
+        if(input$select == "Boxplot")
+          {
+          stateFilter %>% ggplot(aes(y=IBU, fill=as.factor(Ounces))) + geom_boxplot() +
+            xlab("Ale Types (IPA or ALE)") + ylab("IBU") + ggtitle("Boxplot of IBU vs Ale Type")
+        }
+    })
+  }
+
+shinyApp(ui, server)
+```
+
