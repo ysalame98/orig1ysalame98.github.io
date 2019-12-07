@@ -1,7 +1,7 @@
 ---
 title: "About Me"
 author: "Alex Salamah"
-date: "11/11/2019"
+date: "12/6/2019"
 output: html_document
 ---
 
@@ -10,28 +10,27 @@ knitr::opts_chunk$set(echo = TRUE)
 #
 ```
 <div style="width:100px; height:50px">
-![](/Users/ysalame98/Documents/SMU/Doing DS/Unit 12/PortfolioNew/Profile1.png)
+![](/Users/ysalame98/Documents/SMU/Doing DS/Project2New/CaseStudy2/Profile1.png)
 </div>
 <br>
 <br>
 <br>
 <br>
 <br>
-<br>
-<br>
+
 
 <p>
-## Backround:
-Currently Pursuing MSDS From SMU.  Expected Gradution Date January 2021.  Holds BS EE from UTD, graduated January 1992.  Offer over twenty six years of IT industry experience with specialization in Business Intelligence, Data modeling and Integration, Enterprise Solution Architecture with implementation of large scale system intergrations projects with focus on the HR Domain.
+## Background:
+Currently Pursuing MSDS From SMU.  Expected graduation date January 2021.  Holds a BSEE from UTD, graduated in January 1992.  Offer over twenty six years of IT industry experience with specialization in Business Intelligence, Data modeling and Integration, Enterprise Solution Architecture with implementation of large scale system interrogations projects with focus on the HR Domain.
 </p>
 
-# Career Goals:
+## Career Goals:
 - Lead a Data Science Center Of Excellence with a focus on Enterprise Scale Implementation.
-- Apply the principles of Enterprise Architecture to the Emerging discipline of Data Science to deliver trusted, repeatable and reliable model based analytics and insights.
+- Apply the principles of Enterprise Architecture to the Emerging discipline of Data Science to deliver trusted, repeatable and reliable model based analytic and insights.
 
 
-## Interresting Facts:
-- Married with two childrens and a dog.
+## Interesting Facts:
+- Married with two children and a dog.
 - Able to speak and write French and Arabic (Native)
 - Big 49ers Fan since the eighties.
 

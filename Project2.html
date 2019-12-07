@@ -65,7 +65,7 @@
 ##  n obs: 870 
 ##  n variables: 36 
 ## 
-## -- Variable type:factor --------------------------------------------------------
+## -- Variable type:factor ------------------------------------------------------------------------------------------
 ##        variable missing complete   n n_unique
 ##       Attrition       0      870 870        2
 ##  BusinessTravel       0      870 870        3
@@ -87,7 +87,7 @@
 ##                          Y: 870, NA: 0   FALSE
 ##               No: 618, Yes: 252, NA: 0   FALSE
 ## 
-## -- Variable type:integer -------------------------------------------------------
+## -- Variable type:integer -----------------------------------------------------------------------------------------
 ##                  variable missing complete   n     mean      sd   p0
 ##                       Age       0      870 870    36.83    8.93   18
 ##                 DailyRate       0      870 870   815.23  401.12  103
@@ -359,406 +359,6 @@
 ## 5                       3              No           223     258 0.8643411
 ## 6                       3             Yes            35     258 0.1356589</code></pre>
 <p><img src="Project2_files/figure-html/unnamed-chunk-26-1.png" /><!-- --> ### Attrition By Job Involvement: This variable appears to play a significant role in attrition whereby employees receiving low job involvement (level 1) are 4 times as likely to be attritioned (46.9%) as those in the next level of job involvement whose attrition rate is (19.3%) <img src="Project2_files/figure-html/unnamed-chunk-27-1.png" /><!-- --> ### Attrition by Job Satisfaction: This variable does not seem to have minimal influence on attrition. <img src="Project2_files/figure-html/unnamed-chunk-28-1.png" /><!-- --> ### Attrition by Training Times Last Year: This variable appears to play a significant role in attrition whereby employees receiving different levels of training have different attrition rates. <img src="Project2_files/figure-html/unnamed-chunk-29-1.png" /><!-- --> ### Classify using the KNN. Tried using Under sample, Over Sample and both none of the balanced training data produced the desired effect, to I decided to use the original data set. Using the analysis of the categorical and continuous variables conducted above, the following variables were selected to fit a KNN Model: StockOptionLevel, DistanceFromHome, MonthlyIncome, JobInvolvement. Through multiple iteration of K, Seed optimization, and different train/test split ratios the following parameters were the most optimal: K= 7, Split = 85%, and Seed = 100. With these parameters, the model was fitted and trained and the below are the outcomes: prediction Accuracy = 86.1%, Specificity = 75% Sensitivity = 86.5%</p>
-<pre><code>## [1] 1
-## [1] 0.7923077
-## [1] 0.816
-## [1] 0.2
-## [1] 2
-## [1] 0.8538462
-## [1] 0.8730159
-## [1] 0.25
-## [1] 3
-## [1] 0.8
-## [1] 0.8253968
-## [1] 0
-## [1] 4
-## [1] 0.8923077
-## [1] 0.90625
-## [1] 0
-## [1] 5
-## [1] 0.8384615
-## [1] 0.8384615
-## [1] NA
-## [1] 6
-## [1] 0.8153846
-## [1] 0.8333333
-## [1] 0.25
-## [1] 7
-## [1] 0.8692308
-## [1] 0.8888889
-## [1] 0.25
-## [1] 8
-## [1] 0.8153846
-## [1] 0.8267717
-## [1] 0.3333333
-## [1] 9
-## [1] 0.8076923
-## [1] 0.8139535
-## [1] 0
-## [1] 10
-## [1] 0.8307692
-## [1] 0.8425197
-## [1] 0.3333333
-## [1] 11
-## [1] 0.7538462
-## [1] 0.7886179
-## [1] 0.1428571
-## [1] 12
-## [1] 0.8692308
-## [1] 0.8740157
-## [1] 0.6666667
-## [1] 13
-## [1] 0.8692308
-## [1] 0.8692308
-## [1] NA
-## [1] 14
-## [1] 0.8076923
-## [1] 0.8139535
-## [1] 0
-## [1] 15
-## [1] 0.8153846
-## [1] 0.8333333
-## [1] 0.25
-## [1] 16
-## [1] 0.8307692
-## [1] 0.8536585
-## [1] 0.4285714
-## [1] 17
-## [1] 0.8230769
-## [1] 0.8294574
-## [1] 0
-## [1] 18
-## [1] 0.8230769
-## [1] 0.8492063
-## [1] 0
-## [1] 19
-## [1] 0.8615385
-## [1] 0.8888889
-## [1] 0
-## [1] 20
-## [1] 0.8769231
-## [1] 0.896
-## [1] 0.4
-## [1] 21
-## [1] 0.7923077
-## [1] 0.8360656
-## [1] 0.125
-## [1] 22
-## [1] 0.8
-## [1] 0.8373984
-## [1] 0.1428571
-## [1] 23
-## [1] 0.8461538
-## [1] 0.8515625
-## [1] 0.5
-## [1] 24
-## [1] 0.8461538
-## [1] 0.8770492
-## [1] 0.375
-## [1] 25
-## [1] 0.8538462
-## [1] 0.8604651
-## [1] 0
-## [1] 26
-## [1] 0.8230769
-## [1] 0.8230769
-## [1] NA
-## [1] 27
-## [1] 0.8692308
-## [1] 0.88
-## [1] 0.6
-## [1] 28
-## [1] 0.8230769
-## [1] 0.8425197
-## [1] 0
-## [1] 29
-## [1] 0.8076923
-## [1] 0.8387097
-## [1] 0.1666667
-## [1] 30
-## [1] 0.8384615
-## [1] 0.84375
-## [1] 0.5
-## [1] 31
-## [1] 0.8076923
-## [1] 0.8174603
-## [1] 0.5
-## [1] 32
-## [1] 0.8230769
-## [1] 0.8294574
-## [1] 0
-## [1] 33
-## [1] 0.8230769
-## [1] 0.828125
-## [1] 0.5
-## [1] 34
-## [1] 0.8538462
-## [1] 0.8661417
-## [1] 0.3333333
-## [1] 35
-## [1] 0.8076923
-## [1] 0.8203125
-## [1] 0
-## [1] 36
-## [1] 0.7769231
-## [1] 0.8
-## [1] 0.2
-## [1] 37
-## [1] 0.8615385
-## [1] 0.888
-## [1] 0.2
-## [1] 38
-## [1] 0.8923077
-## [1] 0.8923077
-## [1] NA
-## [1] 39
-## [1] 0.8461538
-## [1] 0.8571429
-## [1] 0.5
-## [1] 40
-## [1] 0.8076923
-## [1] 0.8188976
-## [1] 0.3333333
-## [1] 41
-## [1] 0.8230769
-## [1] 0.84
-## [1] 0.4
-## [1] 42
-## [1] 0.8153846
-## [1] 0.8346457
-## [1] 0
-## [1] 43
-## [1] 0.7846154
-## [1] 0.796875
-## [1] 0
-## [1] 44
-## [1] 0.8307692
-## [1] 0.8425197
-## [1] 0.3333333
-## [1] 45
-## [1] 0.7923077
-## [1] 0.8031496
-## [1] 0.3333333
-## [1] 46
-## [1] 0.8153846
-## [1] 0.8203125
-## [1] 0.5
-## [1] 47
-## [1] 0.8230769
-## [1] 0.8688525
-## [1] 0.125
-## [1] 48
-## [1] 0.8076923
-## [1] 0.8253968
-## [1] 0.25
-## [1] 49
-## [1] 0.8230769
-## [1] 0.8203125
-## [1] 1
-## [1] 50
-## [1] 0.8230769
-## [1] 0.848
-## [1] 0.2
-## [1] 51
-## [1] 0.7846154
-## [1] 0.7890625
-## [1] 0.5
-## [1] 52
-## [1] 0.8692308
-## [1] 0.8888889
-## [1] 0.25
-## [1] 53
-## [1] 0.8230769
-## [1] 0.824
-## [1] 0.8
-## [1] 54
-## [1] 0.8153846
-## [1] 0.8333333
-## [1] 0.25
-## [1] 55
-## [1] 0.8692308
-## [1] 0.875
-## [1] 0.5
-## [1] 56
-## [1] 0.8384615
-## [1] 0.8449612
-## [1] 0
-## [1] 57
-## [1] 0.8461538
-## [1] 0.8709677
-## [1] 0.3333333
-## [1] 58
-## [1] 0.8384615
-## [1] 0.8372093
-## [1] 1
-## [1] 59
-## [1] 0.8076923
-## [1] 0.8333333
-## [1] 0
-## [1] 60
-## [1] 0.8076923
-## [1] 0.8455285
-## [1] 0.1428571
-## [1] 61
-## [1] 0.8153846
-## [1] 0.8139535
-## [1] 1
-## [1] 62
-## [1] 0.8230769
-## [1] 0.8346457
-## [1] 0.3333333
-## [1] 63
-## [1] 0.8153846
-## [1] 0.8188976
-## [1] 0.6666667
-## [1] 64
-## [1] 0.8538462
-## [1] 0.859375
-## [1] 0.5
-## [1] 65
-## [1] 0.8461538
-## [1] 0.8661417
-## [1] 0
-## [1] 66
-## [1] 0.8615385
-## [1] 0.8604651
-## [1] 1
-## [1] 67
-## [1] 0.8461538
-## [1] 0.8449612
-## [1] 1
-## [1] 68
-## [1] 0.8230769
-## [1] 0.8203125
-## [1] 1
-## [1] 69
-## [1] 0.8153846
-## [1] 0.8203125
-## [1] 0.5
-## [1] 70
-## [1] 0.8230769
-## [1] 0.848
-## [1] 0.2
-## [1] 71
-## [1] 0.7846154
-## [1] 0.8064516
-## [1] 0.3333333
-## [1] 72
-## [1] 0.8153846
-## [1] 0.8203125
-## [1] 0.5
-## [1] 73
-## [1] 0.8
-## [1] 0.8306452
-## [1] 0.1666667
-## [1] 74
-## [1] 0.8153846
-## [1] 0.8253968
-## [1] 0.5
-## [1] 75
-## [1] 0.8461538
-## [1] 0.8582677
-## [1] 0.3333333
-## [1] 76
-## [1] 0.8923077
-## [1] 0.8992248
-## [1] 0
-## [1] 77
-## [1] 0.8230769
-## [1] 0.8217054
-## [1] 1
-## [1] 78
-## [1] 0.8538462
-## [1] 0.8527132
-## [1] 1
-## [1] 79
-## [1] 0.8538462
-## [1] 0.8650794
-## [1] 0.5
-## [1] 80
-## [1] 0.8153846
-## [1] 0.8333333
-## [1] 0.25
-## [1] 81
-## [1] 0.8538462
-## [1] 0.8515625
-## [1] 1
-## [1] 82
-## [1] 0.8615385
-## [1] 0.8888889
-## [1] 0
-## [1] 83
-## [1] 0.8
-## [1] 0.8062016
-## [1] 0
-## [1] 84
-## [1] 0.8384615
-## [1] 0.8629032
-## [1] 0.3333333
-## [1] 85
-## [1] 0.7923077
-## [1] 0.8416667
-## [1] 0.2
-## [1] 86
-## [1] 0.7923077
-## [1] 0.796875
-## [1] 0.5
-## [1] 87
-## [1] 0.8538462
-## [1] 0.864
-## [1] 0.6
-## [1] 88
-## [1] 0.8692308
-## [1] 0.9032258
-## [1] 0.1666667
-## [1] 89
-## [1] 0.8461538
-## [1] 0.8449612
-## [1] 1
-## [1] 90
-## [1] 0.8153846
-## [1] 0.8188976
-## [1] 0.6666667
-## [1] 91
-## [1] 0.7769231
-## [1] 0.796748
-## [1] 0.4285714
-## [1] 92
-## [1] 0.8
-## [1] 0.8360656
-## [1] 0.25
-## [1] 93
-## [1] 0.8538462
-## [1] 0.872
-## [1] 0.4
-## [1] 94
-## [1] 0.8846154
-## [1] 0.8897638
-## [1] 0.6666667
-## [1] 95
-## [1] 0.8076923
-## [1] 0.8253968
-## [1] 0.25
-## [1] 96
-## [1] 0.8461538
-## [1] 0.872
-## [1] 0.2
-## [1] 97
-## [1] 0.8538462
-## [1] 0.8671875
-## [1] 0
-## [1] 98
-## [1] 0.8153846
-## [1] 0.8617886
-## [1] 0
-## [1] 99
-## [1] 0.8615385
-## [1] 0.8615385
-## [1] NA
-## [1] 100
-## [1] 0.8615385
-## [1] 0.8650794
-## [1] 0.75</code></pre>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##      classifications
@@ -825,186 +425,45 @@
 </div>
 <div id="linear-regression" class="section level2">
 <h2>Linear Regression</h2>
-<div id="validate-assumptions-the-ggplots-and-point-plots-confirm-the-assumptions.-there-is-no-evidence-against-normal-distributions" class="section level3">
-<h3>Validate assumptions: The GGPLOTS and point plots confirm the assumptions. There is no evidence against normal distributions</h3>
-<p>There does not seem to be much evidence against a linear relationship between the means and there does not seem to be much evidence of non-constant standard deviation of the normal distributions.</p>
+<div id="validate-assumptions-the-ggplots-and-point-plots-confirm-the-assumptions.-there-is-no-evidence-against-normal-distributions.-there-does-not-seem-to-be-much-evidence-against-a-linear-relationship-between-the-means-and-there-does-not-seem-to-be-much-evidence-of-non-constant-standard-deviation-of-the-normal-distributions." class="section level3">
+<h3>Validate assumptions: The GGPLOTS and point plots confirm the assumptions. There is no evidence against normal distributions. There does not seem to be much evidence against a linear relationship between the means and there does not seem to be much evidence of non-constant standard deviation of the normal distributions.</h3>
 <pre><code>## 
 ## Attaching package: &#39;Metrics&#39;</code></pre>
 <pre><code>## The following objects are masked from &#39;package:caret&#39;:
 ## 
 ##     precision, recall</code></pre>
-<p><img src="Project2_files/figure-html/unnamed-chunk-33-1.png" /><!-- --><img src="Project2_files/figure-html/unnamed-chunk-33-2.png" /><!-- --><img src="Project2_files/figure-html/unnamed-chunk-33-3.png" /><!-- --><img src="Project2_files/figure-html/unnamed-chunk-33-4.png" /><!-- --><img src="Project2_files/figure-html/unnamed-chunk-33-5.png" /><!-- --></p>
-<pre><code>## ```
-</code></pre>
+<p><img src="Project2_files/figure-html/unnamed-chunk-33-1.png" /><!-- --><img src="Project2_files/figure-html/unnamed-chunk-33-2.png" /><!-- --><img src="Project2_files/figure-html/unnamed-chunk-33-3.png" /><!-- --><img src="Project2_files/figure-html/unnamed-chunk-33-4.png" /><!-- --><img src="Project2_files/figure-html/unnamed-chunk-33-5.png" /><!-- --><img src="Project2_files/figure-html/unnamed-chunk-33-6.png" /><!-- --> ### Fit the Linear Regression Model using significant variables identified above. Specifically: - Years At company - Total Working Years - Job Level</p>
+<pre><code>## [1] 1379.319</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = MonthlyIncome ~ YearsAtCompany + TotalWorkingYears + 
+##     JobLevel, data = NumMainAttrDF)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -5625.1  -888.5    42.3   725.5  3968.3 
+## 
+## Coefficients:
+##                   Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)       -1764.37     100.04 -17.637  &lt; 2e-16 ***
+## YearsAtCompany      -32.04      10.11  -3.170  0.00158 ** 
+## TotalWorkingYears    70.76      11.07   6.394 2.64e-10 ***
+## JobLevel           3724.98      68.94  54.035  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1383 on 866 degrees of freedom
+## Multiple R-squared:  0.9099, Adjusted R-squared:  0.9096 
+## F-statistic:  2915 on 3 and 866 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre><code>##                         2.5 %      97.5 %
+## (Intercept)       -1960.72215 -1568.02112
+## YearsAtCompany      -51.87443   -12.20068
+## TotalWorkingYears    49.04284    92.48534
+## JobLevel           3589.67851  3860.28464</code></pre>
 </div>
+<div id="predit-salary" class="section level3">
+<h3>Predit Salary</h3>
 </div>
-<div id="plot-11-3-est-0s" class="section level2">
-<h2>plot: [1,1] [&gt;——————————————–] 3% est: 0s</h2>
-</div>
-<div id="plot-12---6-est-4s" class="section level2">
-<h2>plot: [1,2] [=&gt;——————————————-] 6% est: 4s</h2>
-</div>
-<div id="plot-13-8-est-4s" class="section level2">
-<h2>plot: [1,3] [===&gt;—————————————–] 8% est: 4s</h2>
-</div>
-<div id="plot-14---11-est-4s" class="section level2">
-<h2>plot: [1,4] [====&gt;—————————————-] 11% est: 4s</h2>
-</div>
-<div id="plot-15-14-est-5s" class="section level2">
-<h2>plot: [1,5] [=====&gt;—————————————] 14% est: 5s</h2>
-</div>
-<div id="plot-16---17-est-4s" class="section level2">
-<h2>plot: [1,6] [=======&gt;————————————-] 17% est: 4s</h2>
-</div>
-<div id="plot-21-19-est-4s" class="section level2">
-<h2>plot: [2,1] [========&gt;————————————] 19% est: 4s</h2>
-</div>
-<div id="plot-22-22-est-4s" class="section level2">
-<h2>plot: [2,2] [=========&gt;———————————–] 22% est: 4s</h2>
-</div>
-<div id="plot-23---25-est-4s" class="section level2">
-<h2>plot: [2,3] [==========&gt;———————————-] 25% est: 4s</h2>
-</div>
-<div id="plot-24-28-est-4s" class="section level2">
-<h2>plot: [2,4] [===========&gt;———————————] 28% est: 4s</h2>
-</div>
-<div id="plot-25---31-est-4s" class="section level2">
-<h2>plot: [2,5] [=============&gt;——————————-] 31% est: 4s</h2>
-</div>
-<div id="plot-26-33-est-4s" class="section level2">
-<h2>plot: [2,6] [==============&gt;——————————] 33% est: 4s</h2>
-</div>
-<div id="plot-31-36-est-4s" class="section level2">
-<h2>plot: [3,1] [===============&gt;—————————–] 36% est: 4s</h2>
-</div>
-<div id="plot-32-39-est-4s" class="section level2">
-<h2>plot: [3,2] [=================&gt;—————————] 39% est: 4s</h2>
-</div>
-<div id="plot-33-42-est-4s" class="section level2">
-<h2>plot: [3,3] [==================&gt;————————–] 42% est: 4s</h2>
-</div>
-<div id="plot-34---44-est-4s" class="section level2">
-<h2>plot: [3,4] [===================&gt;————————-] 44% est: 4s</h2>
-</div>
-<div id="plot-35-47-est-4s" class="section level2">
-<h2>plot: [3,5] [====================&gt;————————] 47% est: 4s</h2>
-</div>
-<div id="plot-36-50-est-3s" class="section level2">
-<h2>plot: [3,6] [=====================&gt;———————–] 50% est: 3s</h2>
-</div>
-<div id="plot-41-53-est-3s" class="section level2">
-<h2>plot: [4,1] [=======================&gt;———————] 53% est: 3s</h2>
-</div>
-<div id="plot-42-56-est-3s" class="section level2">
-<h2>plot: [4,2] [========================&gt;——————–] 56% est: 3s</h2>
-</div>
-<div id="plot-43---58-est-3s" class="section level2">
-<h2>plot: [4,3] [=========================&gt;——————-] 58% est: 3s</h2>
-</div>
-<div id="plot-44-61-est-3s" class="section level2">
-<h2>plot: [4,4] [===========================&gt;—————–] 61% est: 3s</h2>
-</div>
-<div id="plot-45---64-est-2s" class="section level2">
-<h2>plot: [4,5] [============================&gt;—————-] 64% est: 2s</h2>
-</div>
-<div id="plot-46-67-est-2s" class="section level2">
-<h2>plot: [4,6] [=============================&gt;—————] 67% est: 2s</h2>
-</div>
-<div id="plot-51-69-est-2s" class="section level2">
-<h2>plot: [5,1] [==============================&gt;————–] 69% est: 2s</h2>
-</div>
-<div id="plot-52---72-est-2s" class="section level2">
-<h2>plot: [5,2] [===============================&gt;————-] 72% est: 2s</h2>
-</div>
-<div id="plot-53-75-est-2s" class="section level2">
-<h2>plot: [5,3] [=================================&gt;———–] 75% est: 2s</h2>
-</div>
-<div id="plot-54---78-est-1s" class="section level2">
-<h2>plot: [5,4] [==================================&gt;———-] 78% est: 1s</h2>
-</div>
-<div id="plot-55-81-est-1s" class="section level2">
-<h2>plot: [5,5] [===================================&gt;———] 81% est: 1s</h2>
-</div>
-<div id="plot-56---83-est-1s" class="section level2">
-<h2>plot: [5,6] [=====================================&gt;——-] 83% est: 1s</h2>
-</div>
-<div id="plot-61-86-est-1s" class="section level2">
-<h2>plot: [6,1] [======================================&gt;——] 86% est: 1s</h2>
-</div>
-<div id="plot-62-89-est-1s" class="section level2">
-<h2>plot: [6,2] [=======================================&gt;—–] 89% est: 1s</h2>
-</div>
-<div id="plot-63---92-est-1s" class="section level2">
-<h2>plot: [6,3] [========================================&gt;—-] 92% est: 1s</h2>
-</div>
-<div id="plot-64-94-est-0s" class="section level2">
-<h2>plot: [6,4] [=========================================&gt;—] 94% est: 0s</h2>
-</div>
-<div id="plot-65---97-est-0s" class="section level2">
-<h2>plot: [6,5] [===========================================&gt;-] 97% est: 0s</h2>
-</div>
-<div id="plot-66-100-est-0s" class="section level2">
-<h2>plot: [6,6] [=============================================]100% est: 0s</h2>
-<pre><code>
-![](Project2_files/figure-html/unnamed-chunk-33-6.png)&lt;!-- --&gt;
-</code></pre>
-</div>
-<div id="section" class="section level2">
-<h2>[1] 1379.319</h2>
-<pre><code></code></pre>
-</div>
-<div id="section-1" class="section level2">
-<h2></h2>
-</div>
-<div id="call" class="section level2">
-<h2>Call:</h2>
-</div>
-<div id="lmformula-monthlyincome-yearsatcompany-totalworkingyears" class="section level2">
-<h2>lm(formula = MonthlyIncome ~ YearsAtCompany + TotalWorkingYears +</h2>
-</div>
-<div id="joblevel-data-nummainattrdf" class="section level2">
-<h2>JobLevel, data = NumMainAttrDF)</h2>
-</div>
-<div id="section-2" class="section level2">
-<h2></h2>
-</div>
-<div id="residuals" class="section level2">
-<h2>Residuals:</h2>
-</div>
-<div id="min-1q-median-3q-max" class="section level2">
-<h2>Min 1Q Median 3Q Max</h2>
-</div>
-<div id="section-3" class="section level2">
-<h2>-5625.1 -888.5 42.3 725.5 3968.3</h2>
-</div>
-<div id="section-4" class="section level2">
-<h2></h2>
-</div>
-<div id="coefficients" class="section level2">
-<h2>Coefficients:</h2>
-</div>
-<div id="estimate-std.-error-t-value-prt" class="section level2">
-<h2>Estimate Std. Error t value Pr(&gt;|t|)</h2>
-</div>
-<div id="intercept--1764.37-100.04--17.637-2e-16-yearsatcompany--32.04-10.11--3.170-0.00158-totalworkingyears-70.76-11.07-6.394-2.64e-10-joblevel-3724.98-68.94-54.035-2e-16-signif.-codes-0-0.001-0.01-0.05-.-0.1-1-residual-standard-error-1383-on-866-degrees-of-freedom-multiple-r-squared-0.9099-adjusted-r-squared-0.9096-f-statistic-2915-on-3-and-866-df-p-value-2.2e-16" class="section level2">
-<h2>(Intercept) -1764.37 100.04 -17.637 &lt; 2e-16 <em><strong> ## YearsAtCompany -32.04 10.11 -3.170 0.00158 </strong> ## TotalWorkingYears 70.76 11.07 6.394 2.64e-10 </em><strong> ## JobLevel 3724.98 68.94 54.035 &lt; 2e-16 </strong>* ## — ## Signif. codes: 0 ‘<em><strong>’ 0.001 ’</strong>’ 0.01 ’</em>’ 0.05 ‘.’ 0.1 ’ ’ 1 ## ## Residual standard error: 1383 on 866 degrees of freedom ## Multiple R-squared: 0.9099, Adjusted R-squared: 0.9096 ## F-statistic: 2915 on 3 and 866 DF, p-value: &lt; 2.2e-16</h2>
-<pre><code></code></pre>
-</div>
-<div id="section-5" class="section level2">
-<h2>2.5 % 97.5 %</h2>
-</div>
-<div id="intercept--1960.72215--1568.02112" class="section level2">
-<h2>(Intercept) -1960.72215 -1568.02112</h2>
-</div>
-<div id="yearsatcompany--51.87443--12.20068" class="section level2">
-<h2>YearsAtCompany -51.87443 -12.20068</h2>
-</div>
-<div id="totalworkingyears-49.04284-92.48534" class="section level2">
-<h2>TotalWorkingYears 49.04284 92.48534</h2>
-</div>
-<div id="joblevel-3589.67851-3860.28464" class="section level2">
-<h2>JobLevel 3589.67851 3860.28464</h2>
-<p>```</p>
 </div>
 </div>
     </section>

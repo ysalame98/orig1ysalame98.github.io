@@ -11,7 +11,7 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-# Define the Goals:
+#Define the Goals:
 * Using attrition Data Set, identify the top three factors that contribute to turnover/attrition.  Also, explore job role specific trends that may exist in the data set (e.g., “Data Scientists have the highest job satisfaction”). 
 
 * build a model to predict attrition
@@ -45,7 +45,7 @@ library(class)
 library(e1071)
 library(caret)
 ```
-## Data Read
+##Data Read
 ```{r, include=FALSE}
 # Get the data
 # setwd("C:/Users/ysalame98/Documents/SMU/Doing DS/CaseStudy2/CaseStudy2DDS")
@@ -651,16 +651,12 @@ AttPrd <- MainAttrDF %>% select(Attrition,StockOptionLevel,DistanceFromHome,Mont
     #table(classifications,test$Attrition)
     CM = confusionMatrix(table(test$Attrition,classifications))
     # for each itirriation and K value capture the accuracy
-    print(i)
     Acc[i] = CM$overall[1]
-    print(Acc[i])
-        # for each itirriation and K value capture the Sensitivity 
+    # for each itirriation and K value capture the Sensitivity 
     Sens[i] = CM$byClass[1]
-    print(Sens[i])
-        # for each itirriation and K value capture the Specificity 
+    # for each itirriation and K value capture the Specificity 
     Spec[i]= CM$byClass[2]
-    print(Spec[i])
-      }
+        }
 # Find the mean for each ittiratio and K values.
 CM 
 MeanAcc = rowMeans(Acc)
@@ -723,8 +719,8 @@ N_AttPrd <- MainAttrDF %>% select(Attrition,StockOptionLevel,DistanceFromHome,Mo
 N_CM 
 ```
 ## Linear Regression
-### Validate assumptions:  The GGPLOTS and point plots confirm the assumptions.  There is no evidence against normal distributions 
-There does not seem to be much evidence against a linear relationship between the means and there does not seem to be much evidence of non-constant standard deviation of the normal distributions.
+### Validate assumptions:  The GGPLOTS and point plots confirm the assumptions.  There is no evidence against normal distributions. There does not seem to be much evidence against a linear relationship between the means and there does not seem to be much evidence of non-constant standard deviation of the normal distributions.
+
 ```{r, echo= FALSE}
 #install.packages("Metrics")
 library(Metrics)
@@ -740,12 +736,20 @@ NumMainAttrDF %>% ggplot(aes(x = YearsAtCompany, y = MonthlyIncome)) + geom_poin
 NumMainAttrDF %>% ggplot(aes(y = MonthlyIncome, x = DistanceFromHome)) + geom_point(position="jitter") + geom_smooth(method = "lm")+ labs(title = "Monthly Income vs Distance From Home",x = "Distance From Home", y = "Monthly Income")
 NumMainAttrDF %>% ggplot(aes(y = MonthlyIncome, x = Age)) + geom_point(position="jitter") + geom_smooth(method = "lm")+ labs(title = "Monthly Income vs Age",x = "Age", y = "Monthly Income")
 NumMainAttrDF %>% select(MonthlyIncome,TotalWorkingYears,YearsAtCompany,DistanceFromHome,JobLevel,Age) %>% ggpairs()
+```
+### Fit the Linear Regression Model using significant variables identified above. Specifically:
+- Years At company
+- Total Working Years
+- Job Level
+```{r, echo= FALSE}
 # Fit the model using linear model
 fit = lm(MonthlyIncome~YearsAtCompany + TotalWorkingYears + JobLevel, data= NumMainAttrDF)
 rmse(NumMainAttrDF$MonthlyIncome, predict(fit, NumMainAttrDF))
 summary(fit)
 confint(fit)
-
+```
+### Predit Salary
+```{r, echo= FALSE}
 # Predict Monthly Salary
 NoMonSalDF$MonthlyInc = predict(fit,NoMonSalDF, interval = "confidence")
 write.csv(NoMonSalDF, "Case2PredictionsSalamah Salary.csv")
