@@ -1,8 +1,14 @@
 ---
-title: "Protfolio"
+title: "Portfolio"
 author: "Alex Salamah"
 date: "Last Updated on: 12/06/2019"
 output: html_document
 ---
 
 # This Website exhibits some of my projects and provides some background information about me.
+
+## My Youtube Videos and Presentations Could be found here \
+
+- [MSDS 6303 Beers Data Analysis Case Study 1](https://www.youtube.com/watch?v=YeAa44SVJl0)
+
+- [MSDS 6303 Attrition and Salary EDA, KNN, Naive-Base, Linear Regression Case Study 2](https://www.youtube.com/watch?v=nokoCuVXJOc)
